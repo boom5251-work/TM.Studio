@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StudioProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Info>
+    <Name>ProjectName</Name>
+    <MinimalVersion>
+      <Major>1</Major>
+      <Minor>0</Minor>
+    </MinimalVersion>
+  </Info>
+  <Nodes>
+    <ProjectNode xsi:type="RootProjectNode">
+      <Name>ProjectName</Name>
+      <Path></Path>
+      <ChildNodes>
+        <ProjectNode xsi:type="DirectoryProjectNode">
+          <Name>Output</Name>
+          <Path></Path>
+          <ChildNodes />
+        </ProjectNode>
+      </ChildNodes>
+    </ProjectNode>
+  </Nodes>
+</StudioProject>

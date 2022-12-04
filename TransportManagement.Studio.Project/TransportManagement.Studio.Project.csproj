@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="FileAssociations\Data\FileAssociations.xml" />
+    <None Remove="Management\ProjectManager.cs~RF3e9ae2b0.TMP" />
+    <None Remove="Management\Templates\ProjectFileTemplate.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="FileAssociations\Data\FileAssociations.xml" />
+    <EmbeddedResource Include="Management\Templates\ProjectFileTemplate.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="FileAssociations\Icons\tmsproj.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

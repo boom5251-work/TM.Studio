@@ -4,9 +4,72 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TransportManagement.Studio"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Background="{DynamicResource MainBackground}"
+        SizeChanged="MainWindow_SizeChanged">
 
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      GlassFrameThickness="1"
+                      ResizeBorderThickness="1" />
+    </WindowChrome.WindowChrome>
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Core;component/Resources/Dictionaries/ControlStylesDictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Core;component/Resources/Dictionaries/LightThemeDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="Transparent" MouseDown="TitleBar_MouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="176" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Style="{StaticResource TitleBarButtonsContainer}">
+                <Button Style="{StaticResource TitleBarButton}"
+                        Click="AccountButton_Click">
+                    <Image />
+                </Button>
+
+                <Button Style="{StaticResource TitleBarButton}"
+                        Click="MinimizeButton_Click">
+                    <Image Source="{DynamicResource MinimizeIcon}" />
+                </Button>
+
+                <Button x:Name="maximizeButton"
+                        Style="{StaticResource TitleBarButton}"
+                        Click="MaximizeButton_Click">
+                    <Image />
+                </Button>
+
+                <Button Style="{StaticResource TitleBarButton}"
+                        Click="CloseButton_Click">
+                    <Image Source="{DynamicResource CloseIcon}" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Background="Red" Grid.Column="0"></StackPanel>
+            <Button  Content="Создать проект" Width="100" Height="20" Click="Button_Click" />
+        </Grid>
     </Grid>
 </Window>
