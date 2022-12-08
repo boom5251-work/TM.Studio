@@ -26,7 +26,6 @@ namespace TransportManagement.Studio.Project.Components.Nodes
         /// <summary>
         /// Тип узла проекта.
         /// </summary>
-        [XmlIgnore]
-        public abstract ProjectNodeType Type { get; }
+        public abstract ProjectNodeType Type { get; set; }
     }
 }

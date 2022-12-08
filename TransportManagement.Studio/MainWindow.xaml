@@ -14,16 +14,6 @@
     </WindowChrome.WindowChrome>
 
 
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Core;component/Resources/Dictionaries/ControlStylesDictionary.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Core;component/Resources/Dictionaries/LightThemeDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-    
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -68,8 +58,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Background="Red" Grid.Column="0"></StackPanel>
-            <Button  Content="Создать проект" Width="100" Height="20" Click="Button_Click" />
+            <StackPanel x:Name="objectExplorer" Grid.Column="0"></StackPanel>
+            <!--<Button  Content="Создать проект" Width="100" Height="20" Click="Button_Click" />-->
         </Grid>
     </Grid>
 </Window>

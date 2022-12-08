@@ -1,10 +1,10 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using System.Diagnostics;
+﻿using Core.Controls.ObjectExplorer;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TransportManagement.Studio.Project.Components;
+using TransportManagement.Studio.Project.Components.Nodes;
 using TransportManagement.Studio.Windows;
 
 namespace TransportManagement.Studio
@@ -22,9 +22,10 @@ namespace TransportManagement.Studio
         }
 
 
-        public MainWindow(StudioProject? project) : base()
+        public MainWindow(StudioProject? project) : this()
         {
             Project = project;
+            Loaded += MainWindow_Loaded;
         }
 
 
@@ -36,6 +37,18 @@ namespace TransportManagement.Studio
 
 
 
+        /// <summary>
+        /// Обрабатывает событие загрузки окна.
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие.</param>
+        /// <param name="e">Агрументы.</param>
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadProject();
+        }
+
+
+
         #region Функции кнопок шапки страницы.
         /// <summary>
         /// Устанавливает икноки кнопок шапки.
@@ -44,9 +57,9 @@ namespace TransportManagement.Studio
         {
             // Установка иконки кнопки "развернуть".
             if (WindowState == WindowState.Maximized)
-                ((Image)maximizeButton.Content).Source = (BitmapImage)Resources["NormalizeIcon"];
+                ((Image)maximizeButton.Content).Source = (BitmapImage)Application.Current.Resources["NormalizeIcon"];
             else
-                ((Image)maximizeButton.Content).Source = (BitmapImage)Resources["MaximizeIcon"];
+                ((Image)maximizeButton.Content).Source = (BitmapImage)Application.Current.Resources["MaximizeIcon"];
         }
 
 
@@ -117,6 +130,70 @@ namespace TransportManagement.Studio
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
+        }
+        #endregion
+
+
+
+        #region Работа с экземпляром проекта.
+        /// <summary>
+        /// Загружает проект.
+        /// </summary>
+        private void LoadProject()
+        {
+            if (Project != null)
+            {
+                InitializeObjectExplorer();
+            }
+            else
+            {
+                // TODO: Добавить сообщение о том, что не удалось открыть проект.
+            }
+        }
+
+
+        /// <summary>
+        /// Запускает инициализацию обозревателя объектов.
+        /// </summary>
+        private void InitializeObjectExplorer()
+        {
+            if (Project?.Nodes.Count == 1)
+            {
+                var rootBranch = new ExplorerBranch
+                {
+                    Text = $"Проект \"{Project.Nodes[0].Name}\"",
+                    Icon = (BitmapImage)Application.Current.Resources["StudioProjectIcon"]
+                };
+
+                objectExplorer.Children.Add(rootBranch);
+
+                RootProjectNode root = (RootProjectNode)Project.Nodes[0];
+                AddObjectExplorerBranch(rootBranch, root.ChildNodes);
+            } 
+        }
+
+
+        /// <summary>
+        /// Рекурсивно добавляет элементы в обозреватель проекта.
+        /// </summary>
+        /// <param name="parent">Корневая ветвь обозревателя.</param>
+        /// <param name="childNodes">Дочерние элементы корневого элемента проекта.</param>
+        private void AddObjectExplorerBranch(ExplorerBranch parent, ProjectNodesCollection childNodes)
+        {
+            foreach (var node in childNodes)
+            {
+                var branch = new ExplorerBranch { Text = node.Name };
+                parent.AddChild(branch);
+
+                switch (node.Type)
+                {
+                    case ProjectNodeType.Directory:
+                        var directoryNode = (DirectoryProjectNode)node;
+                        branch.Icon = (BitmapImage)Application.Current.Resources["FolderIcon"];
+                        AddObjectExplorerBranch(branch, directoryNode.ChildNodes);
+                        break;
+                }
+            }
         }
         #endregion
 

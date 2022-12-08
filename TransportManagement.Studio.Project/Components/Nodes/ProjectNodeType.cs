@@ -12,6 +12,6 @@
         /// <summary>
         /// Директория.
         /// </summary>
-        Folder
+        Directory
     }
 }

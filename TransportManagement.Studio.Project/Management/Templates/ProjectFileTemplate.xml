@@ -11,10 +11,12 @@
     <ProjectNode xsi:type="RootProjectNode">
       <Name>ProjectName</Name>
       <Path></Path>
+      <Type>Root</Type>
       <ChildNodes>
         <ProjectNode xsi:type="DirectoryProjectNode">
           <Name>Output</Name>
           <Path></Path>
+          <Type>Directory</Type>
           <ChildNodes />
         </ProjectNode>
       </ChildNodes>

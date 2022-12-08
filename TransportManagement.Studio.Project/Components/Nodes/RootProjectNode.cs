@@ -9,13 +9,20 @@ namespace TransportManagement.Studio.Project.Components.Nodes
     [Serializable]
     public sealed class RootProjectNode : ProjectNode
     {
+        private ProjectNodeType type = ProjectNodeType.Root;
+
+
+
         /// <summary>
         /// Коллекция дочерних узлов корневого узла.
         /// </summary>
         public required ProjectNodesCollection ChildNodes { get; set; }
 
 
-        [XmlIgnore]
-        public override ProjectNodeType Type => ProjectNodeType.Root;
+        public override ProjectNodeType Type
+        {
+            get => type;
+            set => type = value;
+        }
     }
 }
